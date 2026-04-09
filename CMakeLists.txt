@@ -8,6 +8,7 @@ set(CAFFE2_USE_CUDNN 9)
 
 find_package(SDL3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
+find_package(OpenCV REQUIRED)
 
 
 add_executable(ArchitecturesInC__ src/ModelViewControllerArchitecture/main.cpp
@@ -18,6 +19,27 @@ add_executable(ArchitecturesInC__ src/ModelViewControllerArchitecture/main.cpp
         include/ModelViewControllerArchitecture/Utils.h
 )
 
+# Single Responsibility Architecture Executable
+add_executable(SingleResponsibilityApp 
+    src/SingleResponsibilityArchitecture/main.cpp
+    src/SingleResponsibilityArchitecture/filters.cpp
+    src/SingleResponsibilityArchitecture/image_loader.cpp
+    src/SingleResponsibilityArchitecture/sketch_filter.cpp
+    src/SingleResponsibilityArchitecture/cartoon_filter.cpp
+    src/SingleResponsibilityArchitecture/image_display.cpp
+    include/SingleResponsibilityArchitecture/filters.hpp
+    include/SingleResponsibilityArchitecture/image_loader.hpp
+    include/SingleResponsibilityArchitecture/sketch_filter.hpp
+    include/SingleResponsibilityArchitecture/cartoon_filter.hpp
+    include/SingleResponsibilityArchitecture/image_display.hpp
+)
+
+add_executable(OpenAndClosedArchitecture
+        include/OpenAndClosedArchitecture/readers.hpp
+        src/OpenAndClosedArchitecture/readers.cpp
+        src/OpenAndClosedArchitecture/main.cpp
+)
+
 find_package(SDL3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
@@ -26,6 +48,20 @@ target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
 find_package(glm CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
+
+target_link_libraries(OpenAndClosedArchitecture PRIVATE
+        ${OpenCV_LIBS}
+        pthread
+        dl
+        m
+)
+# Link libraries for Single Responsibility Architecture
+target_link_libraries(SingleResponsibilityApp PRIVATE 
+    ${OpenCV_LIBS}
+    pthread
+    dl
+    m
+)
 
 
 target_include_directories(ArchitecturesInC__ PRIVATE
@@ -65,7 +101,7 @@ target_link_libraries(ArchitecturesInC__ PRIVATE
 )
 
 
-set_target_properties(ArchitecturesInC__ PROPERTIES
+set_target_properties(ArchitecturesInC__ SingleResponsibilityApp PROPERTIES
         INSTALL_RPATH "${CMAKE_SOURCE_DIR}/external/libtorch/lib"
         BUILD_WITH_INSTALL_RPATH TRUE
 )
