@@ -40,6 +40,15 @@ add_executable(OpenAndClosedArchitecture
         src/OpenAndClosedArchitecture/main.cpp
 )
 
+add_executable(LiskovSubtitutionArchitecture
+        include/LiskovSubtitutionArchitecture/shapes.hpp
+        include/LiskovSubtitutionArchitecture/Circle.hpp
+        include/LiskovSubtitutionArchitecture/Rectangle.hpp
+        src/LiskovSubtitutionArchitecture/Circle.cpp
+        src/LiskovSubtitutionArchitecture/Rectangle.cpp
+        src/LiskovSubtitutionArchitecture/main.cpp
+
+)
 find_package(SDL3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
@@ -63,6 +72,12 @@ target_link_libraries(SingleResponsibilityApp PRIVATE
     m
 )
 
+target_link_libraries(LiskovSubtitutionArchitecture PRIVATE
+        ${OpenCV_LIBS}
+        pthread
+        dl
+        m
+)
 
 target_include_directories(ArchitecturesInC__ PRIVATE
         "${CMAKE_SOURCE_DIR}/external/libtorch/include"
