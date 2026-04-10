@@ -17,6 +17,9 @@ add_executable(ArchitecturesInC__ src/ModelViewControllerArchitecture/main.cpp
         include/ModelViewControllerArchitecture/SnakeAI.hpp
         src/ModelViewControllerArchitecture/SnakeAI.cpp
         include/ModelViewControllerArchitecture/Utils.h
+
+
+
 )
 
 # Single Responsibility Architecture Executable
@@ -49,6 +52,16 @@ add_executable(LiskovSubtitutionArchitecture
         src/LiskovSubtitutionArchitecture/main.cpp
 
 )
+
+add_executable(InterfaceSegregationArchitecture
+        include/InterfaceSegregationArchitecture/IFilter.hpp
+        include/InterfaceSegregationArchitecture/IFile.hpp
+        include/InterfaceSegregationArchitecture/ImageManager.hpp
+        src/InterfaceSegregationArchitecture/ImageManager.cpp
+        src/InterfaceSegregationArchitecture/main.cpp
+
+
+)
 find_package(SDL3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
@@ -57,6 +70,13 @@ target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
 find_package(glm CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE glm::glm)
+
+target_link_libraries(InterfaceSegregationArchitecture PRIVATE
+        ${OpenCV_LIBS}
+        pthread
+        dl
+        m
+)
 
 target_link_libraries(OpenAndClosedArchitecture PRIVATE
         ${OpenCV_LIBS}
