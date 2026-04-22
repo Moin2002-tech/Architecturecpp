@@ -6,7 +6,8 @@
 #include <opencv2/opencv.hpp>
 #include <iostream>
 
-int main() {
+int main()
+{
     try {
         // Load the test image
         cv::Mat testImage = cv::imread("/home/moinshaikh/CLionProjects/Architecturecpp/data/test.png");

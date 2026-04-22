@@ -17,9 +17,6 @@ add_executable(ArchitecturesInC__ src/ModelViewControllerArchitecture/main.cpp
         include/ModelViewControllerArchitecture/SnakeAI.hpp
         src/ModelViewControllerArchitecture/SnakeAI.cpp
         include/ModelViewControllerArchitecture/Utils.h
-
-
-
 )
 
 # Single Responsibility Architecture Executable
@@ -59,9 +56,24 @@ add_executable(InterfaceSegregationArchitecture
         include/InterfaceSegregationArchitecture/ImageManager.hpp
         src/InterfaceSegregationArchitecture/ImageManager.cpp
         src/InterfaceSegregationArchitecture/main.cpp
+)
 
+add_executable(DRY
+        src/Dry/main.cpp
+)
+
+add_executable(DependencyInversionArchitecture
+        include/DependencyInverseArchitecture/Notifier.hpp
+        include/DependencyInverseArchitecture/SMSNotifier.hpp
+        include/DependencyInverseArchitecture/EmailNotifier.hpp
+        include/DependencyInverseArchitecture/NotificationSystem.hpp
+        src/DependencyInverseArchitecture/SMSNotifier.cpp
+        src/DependencyInverseArchitecture/EmailNotifier.cpp
+        src/DependencyInverseArchitecture/NotificationSystem.cpp
+        src/DependencyInverseArchitecture/main.cpp
 
 )
+
 find_package(SDL3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
