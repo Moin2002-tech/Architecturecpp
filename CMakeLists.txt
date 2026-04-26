@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.28)
 project(ArchitecturesInC__)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -9,7 +9,7 @@ set(CAFFE2_USE_CUDNN 9)
 find_package(SDL3 CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(OpenCV REQUIRED)
-
+find_package(Drogon REQUIRED)
 
 add_executable(ArchitecturesInC__ src/ModelViewControllerArchitecture/main.cpp
         #external/third_party/doctest.cpp
@@ -74,6 +74,18 @@ add_executable(DependencyInversionArchitecture
 
 )
 
+add_executable(StatefulArchitecture
+        include/StatefulArchitectureAndStateLessArchitecture/StatefulArchitecture.h
+        src/StatefulArchitectureAndStateLessArchitecture/StatefulArchitecture.cpp
+        include/StatefulArchitectureAndStateLessArchitecture/StateLessArchitecture.hpp
+        src/StatefulArchitectureAndStateLessArchitecture/StateLessArchitecture.cpp
+        src/StatefulArchitectureAndStateLessArchitecture/main.cpp
+)
+
+
+
+
+target_link_libraries(StatefulArchitecture PRIVATE Drogon::Drogon)
 find_package(SDL3 CONFIG REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL3::SDL3)
 
